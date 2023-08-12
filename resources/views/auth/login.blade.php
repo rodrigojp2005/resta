@@ -1,6 +1,12 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="https://media.giphy.com/media/cChKTgN5nFyklt8ddH/giphy.gif" alt="Logo" width="100px" height="100px">
+            <p style="font-weight: bold;">POSTA-RESTANTE</p>
+        </div>
+        
+        <!-- <img src="https://media.giphy.com/media/cChKTgN5nFyklt8ddH/giphy.gif" alt="Logo" width="100px" height="100px"> -->
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
