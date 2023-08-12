@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,12 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
+
+    Route::get('/messages/{sender_id}/{recipient_id}', [MessageController::class, 'index']);
+    Route::get('/messages/{message_id}', [MessageController::class, 'show']);
+    Route::post('/messages', [MessageController::class, 'store']);
+    Route::delete('/messages/{message_id}', [MessageController::class, 'destroy']);
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
