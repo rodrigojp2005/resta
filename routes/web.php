@@ -13,10 +13,6 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/messages/{sender_id}/{recipient_id}', [MessageController::class, 'index']);
-    Route::get('/messages/{message_id}', [MessageController::class, 'show']);
-    Route::post('/messages', [MessageController::class, 'store']);
-    Route::delete('/messages/{message_id}', [MessageController::class, 'destroy']);
     Route::get('/redigir_texto', [MessageController::class, 'redigirTexto'])->name('redigir_texto');
     Route::post('/salvar', [MessageController::class, 'salvar'])->name('salvar');
     Route::get('/dashboard', [TextoController::class, 'listarTitulos'])->name('dashboard');
