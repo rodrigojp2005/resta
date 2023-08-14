@@ -31,18 +31,7 @@ class TextoController extends Controller
         return redirect('/dashboard')->with('titulo', 'Texto salvo com sucesso.');
 
     }
-    
-    public function salvarTexto(Request $request)
-    {
-        $texto = Texto::create([
-            'user_id' => $request->user()->id,
-            'titulo' => $request->input('titulo'),
-            'texto' => $request->input('texto'),
-        ]);
-        // Faça qualquer outra lógica necessária
-        return response()->json(['message' => 'Texto salvo com sucesso.']);
-    }
-    
+        
     public function deletarTexto($id)
     {
         $texto = Texto::find($id);
