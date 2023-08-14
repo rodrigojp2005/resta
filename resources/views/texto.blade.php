@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body space-y-4 text-gray-500">
                         <h5 class="card-title"></h5>
-                        <form action="{{ route('salvar') }}" method="POST">
+                        <form action="{{ route('salvar_texto') }}" method="POST">
                             @csrf
                             <div>
                                 <label for="titulo" class="block font-medium">Título:</label>
