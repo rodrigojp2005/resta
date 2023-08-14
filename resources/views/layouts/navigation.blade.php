@@ -10,7 +10,7 @@
                         <img src="https://media.giphy.com/media/cChKTgN5nFyklt8ddH/giphy.gif" alt="Logo" width="50px" height="50px">
                     </a>
                     <!-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"> -->
-                    <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex ml-4">
+                    <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex ml-4 text-gray-500">
                         {{ __('Posta Restante') }}
                     </div>
                 </div>
