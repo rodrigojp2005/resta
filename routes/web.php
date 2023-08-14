@@ -13,13 +13,12 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/redigir_texto', [MessageController::class, 'redigirTexto'])->name('redigir_texto');
-    Route::post('/salvar', [MessageController::class, 'salvar'])->name('salvar');
-    Route::get('/dashboard', [TextoController::class, 'listarTitulos'])->name('dashboard');
-    // Nova rota de pesquisa
+    //EXEMPLO DE ROTA::Solicitações HTTP:GET, POST, PUT, DELETE('Endereço na URL', [nomeDoController::class, 'metodo'])->nomeDaRota ou apelido
+    //ROTAS PARA O USUÁRIO
     Route::get('/search', [UserController::class, 'search'])->name('search');
     Route::get('/user/{id}', [UserController::class, 'show'])->name('show'); 
-    // escrever carta
+    // ROTAS PARA O TEXTO
+    Route::get('/dashboard', [TextoController::class, 'listarTitulos'])->name('dashboard');
     Route::get('/escrever_carta', [TextoController::class, 'escreverCarta'])->name('escrever_carta');
     Route::post('/salvar', [TextoController::class, 'salvar'])->name('salvar');
     Route::get('/texto/{id}', [TextoController::class, 'deletarTexto'])->name('deletar_texto');
