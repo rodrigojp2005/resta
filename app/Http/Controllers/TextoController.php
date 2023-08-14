@@ -19,7 +19,7 @@ class TextoController extends Controller
     }
     
 
-    public function salvar(Request $request)
+    public function salvarTexto(Request $request)
     {
         $texto = new Texto();
         $texto->user_id = $request->user()->id;

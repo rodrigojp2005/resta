@@ -20,7 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // ROTAS PARA O TEXTO
     Route::get('/dashboard', [TextoController::class, 'listarTitulos'])->name('dashboard');
     Route::get('/escrever_carta', [TextoController::class, 'escreverCarta'])->name('escrever_carta');
-    Route::post('/salvar', [TextoController::class, 'salvar'])->name('salvar');
+    Route::post('/salvar', [TextoController::class, 'salvarTexto'])->name('salvar_texto');
     Route::get('/texto/{id}', [TextoController::class, 'deletarTexto'])->name('deletar_texto');
     Route::get('/texto/{id}/editar', [TextoController::class, 'editarTexto'])->name('editar_texto');
     Route::put('/texto/{id}/atualizar', [TextoController::class, 'atualizarTexto'])->name('atualizar_texto');
