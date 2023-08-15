@@ -23,4 +23,10 @@ class UserController extends Controller
         // Retornar uma view que exiba os detalhes do usuário
         return view('show', ['user' => $user]);
     }
+
+    public function listarAutorizacoes(){
+        // consulta tabela de autorizações:
+        return view('lista_solicitacoes_autorizacoes');
+    }
+
 }

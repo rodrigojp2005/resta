@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\TextoController;
+use App\Http\Controllers\AutorizacoesController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/texto/{id}', [TextoController::class, 'deletarTexto'])->name('deletar_texto');
     Route::get('/texto/{id}/editar', [TextoController::class, 'editarTexto'])->name('editar_texto');
     Route::put('/texto/{id}/atualizar', [TextoController::class, 'atualizarTexto'])->name('atualizar_texto');
+    //ROTAS PARA AUTORIZAÇÕES
+    // Route::get('/autorizacoes', [UserController::class, 'listarAutorizacoes'])->name('autorizacoes');
+    Route::get('/autorizacoes', [AutorizacoesController::class, 'index'])->name('autorizacoes');
 });
 
 Route::middleware('auth')->group(function () {

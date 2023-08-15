@@ -47,7 +47,8 @@
                                 <div style="display: flex; justify-content: space-between; align-items: center;">
                                     <div>{{ $result->name }}</div>
                                     <div>
-                                        <a href="{{ route('show', ['id' => $result->id]) }}" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Solicitar Acesso</a>
+                                        <!-- <a href="{{ route('show', ['id' => $result->id]) }}" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Solicitar Acesso</a> -->
+                                        <a href="#" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Solicitar Acesso</a>
                                     </div>
                                 </div>
                             </li>
@@ -64,4 +65,26 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var btnSolicitarAcesso = document.getElementById('btn-solicitar-acesso');
+
+        btnSolicitarAcesso.addEventListener('click', function() {
+            this.disabled = true; // Desabilita o botão
+            this.style.display = 'inline-block';
+            this.style.padding = '4px 8px';
+            this.style.backgroundColor = '#808080';
+            this.style.color = 'white';
+            this.style.textAlign = 'center';
+            this.style.textDecoration = 'none';
+            this.style.border = 'none';
+            this.style.borderRadius = '4px';
+            this.style.cursor = 'pointer';
+
+            this.textContent = 'Aguardando Liberação'; // Altera o texto do botão
+        });
+    });
+</script>
+
 

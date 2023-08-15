@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('autorizador_id');
             $table->unsignedBigInteger('autorizado_id');
+            $table->string('status')->default('pendente');
             $table->timestamps();
     
             $table->foreign('autorizador_id')->references('id')->on('users');
