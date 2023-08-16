@@ -2,8 +2,10 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <form id="meuFormulario" onsubmit="handleSubmit(event)">
+                <!-- <form   action="{{ route('autorizacoes') }}" method="POST"> -->
+                <form id="meuFormulario" action="{{ route('autorizacoes_update', $autorizacoes->first()->autorizador_id) }}" method="POST" onsubmit="handleSubmit(event)">
                     @csrf
+                    @method('PUT')
                     @foreach ($autorizacoes as $autorizacao)
                         <div class="flex items-center justify-between border-b border-gray-200 p-4">
                             <span class="truncate text-left text-gray-600" style="overflow-wrap: break-word;">{{ $autorizacao->autorizado->name }} - {{ $autorizacao->autorizado_id }}</span>
@@ -25,24 +27,18 @@
     </div>
     <script>
 
-    const checkboxValues = [];
+    //const checkboxValues = [];
+    const checkboxValues = {};
     function handleCheckboxChange(event) {
        // const id_user = event.target.dataset.userId;
         const checkbox = event.target;
         const isChecked = checkbox.checked;
         const value = isChecked ? "aprovado" : "reprovado";
        // const index = checkboxValues.indexOf(value);
-
-       // checkboxValues.push(value);
-        
-        console.clear();
-        checkbox.value = value;
-
-        // console.log("Checkbox value:", value);
-        // console.log("ID do usuário:", checkbox.dataset.userId);
-        // console.log("Checkbox values:", checkboxValues);
-        // console.log("- - - - - - - -");
-        //console.log("user_id:", checkbox.dataset.userId+'['+value+']');
+        //checkboxValues[userId] = value;
+        //console.log("Checkbox values:", checkboxValues);
+        checkbox.value = value; //??
+        //console.log("Checkbox value:", value);
     }
 
     function handleSubmit(event) {
@@ -50,31 +46,43 @@
 
         // Verificar o estado de todos os checkboxes
         var checkboxes = document.querySelectorAll('#meuFormulario input[type="checkbox"]');
-        var checkboxValues = [];
+  //      var checkboxValues = [];
 
-        checkboxes.forEach(function(checkbox) {
-            var value = checkbox.value;
-            var checked = checkbox.checked;
-            var userId = checkbox.dataset.userId;
+        // checkboxes.forEach(function(checkbox) {
+        //     var value = checkbox.value;
+        //     var checked = checkbox.checked;
+        //     var userId = checkbox.dataset.userId;
 
-            checkboxValues.push({
-                userId: userId,
-                value: value,
-                checked: checked
-            });
-        });
+        //     checkboxValues.push({
+        //         userId: userId,
+        //         value: value,
+        //         checked: checked
+        //     });
+        // });
 
         // Exibir os resultados em um alerta ou elemento HTML
-        checkboxValues.forEach(function(obj) {
-            console.log('ID do usuário:', obj.userId);
-            console.log('Valor do checkbox:', obj.value);
-           // console.log('Marcado:', obj.checked);
+        // checkboxValues.forEach(function(obj) {
+        //     console.log('ID do usuário:', obj.userId);
+        //     console.log('Valor do checkbox:', obj.value);
+        //    // console.log('Marcado:', obj.checked);
+        // });
+
+        fetch(event.target.action, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+            body: JSON.stringify(checkboxValues)
+        })
+        .then(response => {
+            // Tratar a resposta da requisição
+        })
+        .catch(error => {
+            // Tratar erros da requisição
         });
-
-        // Envie o formulário
-     //   event.target.submit();
+            // Envie o formulário
+     //       event.target.submit();
     }
-
-
 </script>
 </x-app-layout>
