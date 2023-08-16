@@ -31,18 +31,9 @@
         const checkbox = event.target;
         const isChecked = checkbox.checked;
         const value = isChecked ? "aprovado" : "reprovado";
-       // const index = checkboxValues.indexOf(value);
-
-       // checkboxValues.push(value);
         
         console.clear();
         checkbox.value = value;
-
-        // console.log("Checkbox value:", value);
-        // console.log("ID do usuário:", checkbox.dataset.userId);
-        // console.log("Checkbox values:", checkboxValues);
-        // console.log("- - - - - - - -");
-        //console.log("user_id:", checkbox.dataset.userId+'['+value+']');
     }
 
     function handleSubmit(event) {
