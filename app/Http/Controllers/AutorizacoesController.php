@@ -21,23 +21,26 @@ class AutorizacoesController extends Controller
 
     public function salvarAutorizacoes(Request $request)
     {
-      $valores= $request->all();
-      
-      
-      dd($valores);
-      
-        // foreach ($checkboxValues as $value) {
-        //     $userId = $value['userId'];
-        //     $status = $value['value'];
-        // //  var_dump($userId,$status);
-        //     // Salvar no banco de dados
-        //     Autorizacao::updateOrCreate(
-        //         ['autorizado_id' => $userId],
-        //         ['status' => $status]
-        //     );
-        // }
+      $userId = Auth::id(); // Obter o ID do usuário logado
+      $valores = $request->input('valoresCheckbox'); // Obter o valor da chave 'valoresCheckbox'
+      $valoresArray = json_decode($valores, true);
 
-        return redirect()->route('autorizacoes'); // Redirecionar para onde você desejar após salvar
-    }
+      $separatedValues = [];
+      foreach ($valoresArray as $value) {
+          $parts = explode("-", $value);
+          $separatedValues[] = [
+              'status' => $parts[0], // Parte antes do hífen
+              'id' => $parts[1],     // Parte depois do hífen
+          ];
+      }
+  
+      foreach ($separatedValues as $value) {
+        Autorizacao::where('autorizador_id', $userId)
+        ->where('autorizado_id', $value['id'])
+        ->update(['status' => $value['status']]);
+        }
+       // dd($separatedValues,$userId);
+      return redirect()->route('dashboard'); // Redirecionar para onde você desejar após salvar
+  }
 
 }
