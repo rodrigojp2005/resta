@@ -41,6 +41,18 @@ class AutorizacoesController extends Controller
         }
        // dd($separatedValues,$userId);
       return redirect()->route('dashboard'); // Redirecionar para onde você desejar após salvar
-  }
+    }
 
+    public function enviarSolicitacao(Request $request){
+      $userId = Auth::id(); 
+      //$valores=$request->all();
+      $valores = $request->input('id');
+      Autorizacao::create([
+        'autorizador_id' => $valores,
+        'autorizado_id' => $userId,
+        'status' => 'pendente'
+      ]);
+      return redirect()->route('dashboard');
+      //dd('Meu Id: '.$userId,' Id Solicitado: '.$valores);
+    }
 }

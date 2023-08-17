@@ -16,7 +16,7 @@
                                 <tr>
                                     <td class="text-right p-2" style="border-bottom: 1px solid lightgray;">
                                         <div class="flex justify-between">
-                                            <span class="truncate text-left text-gray-600" style="overflow-wrap: break-word;">{{ $texto->titulo }} </span>
+                                            <span class="truncate text-left text-gray-600" style="overflow-wrap: break-word;">{{ $texto->titulo }}</span>
                                             <div class="flex justify-end">
                                                 <a href="{{ route('editar_texto', ['id' => $texto->id]) }}" class="inline-block w-8 h-8" ><img src="https://img.icons8.com/?size=512&id=118958&format=png" class="w-8 h-8" alt="Editar"></a>
                                                 <a href="{{ route('deletar_texto', ['id' => $texto->id]) }}" class="inline-block w-8 h-8"><img src="https://img.icons8.com/?size=512&id=102350&format=png" class="w-8 h-8" alt="Excluir"></a>
@@ -35,7 +35,7 @@
                     <div class="flex justify-center w-full">
                         <!-- {{ __("Pesquise o nome de usuário") }} -->
                         <form action="{{ route('search') }}" method="GET">
-                            <input type="text" name="name" placeholder="Pesquise o usuário" class="rounded-lg shadow-sm p-2 bg-gray-100 text-gray-700 hover:bg-gray-200">
+                            <input type="text" name="name" placeholder="Pesquise um usuário" class="rounded-lg shadow-sm p-2 bg-gray-100 text-gray-700 hover:bg-gray-200">
                             <button type="submit" class="inline-block"><img src="https://img.icons8.com/?size=512&id=12773&format=png" class="w-8 h-8" alt="Pesquisar"></button>
                         </form>
                     </div>
@@ -45,14 +45,10 @@
                             @foreach ($results as $result)
                             <li>
                                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>{{ $result->name }}- {{ $result->id }}</div>
+                                    <div>{{ $result->name }}</div>
                                     <div>
-                                        <!-- <a href="{{ route('enviar_solicitacao', ['id' => $result->id]) }}" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Solicitar Acesso</a> -->
-                                        <form action="{{ route('enviar_solicitacao') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $result->id }}">
-                                            <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Solicitar Acesso</button>
-                                        </form>
+                                        <!-- <a href="{{ route('show', ['id' => $result->id]) }}" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Solicitar Acesso</a> -->
+                                        <a href="#" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Solicitar Acesso</a>
                                     </div>
                                 </div>
                             </li>
@@ -69,4 +65,26 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var btnSolicitarAcesso = document.getElementById('btn-solicitar-acesso');
+
+        btnSolicitarAcesso.addEventListener('click', function() {
+            this.disabled = true; // Desabilita o botão
+            this.style.display = 'inline-block';
+            this.style.padding = '4px 8px';
+            this.style.backgroundColor = '#808080';
+            this.style.color = 'white';
+            this.style.textAlign = 'center';
+            this.style.textDecoration = 'none';
+            this.style.border = 'none';
+            this.style.borderRadius = '4px';
+            this.style.cursor = 'pointer';
+
+            this.textContent = 'Aguardando Liberação'; // Altera o texto do botão
+        });
+    });
+</script>
+
 

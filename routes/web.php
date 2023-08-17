@@ -28,7 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //ROTAS PARA AUTORIZAÇÕES
     Route::get('/autorizacoes', [AutorizacoesController::class, 'index'])->name('autorizacoes');
     Route::post('/salvar-autorizacoes', [AutorizacoesController::class, 'salvarAutorizacoes'])->name('salvar_autorizacoes');
-
+    Route::post('/enviar-solicitacao', [AutorizacoesController::class, 'enviarSolicitacao'])->name('enviar_solicitacao');
 });
 
 Route::middleware('auth')->group(function () {

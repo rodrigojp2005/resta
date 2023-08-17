@@ -15,7 +15,9 @@ class TextoController extends Controller
     {
         $userId = Auth::id();
         $textos = Texto::where('user_id', $userId)->get(['id', 'titulo']);
+        //dd($textos);
         return view('dashboard', ['textos' => $textos]);
+        //return view('dashboard', compact('textos'));
     }
     
 

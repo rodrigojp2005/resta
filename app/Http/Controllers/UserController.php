@@ -13,6 +13,7 @@ class UserController extends Controller
         $results = User::where('name', 'LIKE', '%' . $name . '%')
                     ->select('id', 'name')
                     ->get();
+        //dd($results);
         return view('dashboard', ['results' => $results]);
     }
     public function show($id)
