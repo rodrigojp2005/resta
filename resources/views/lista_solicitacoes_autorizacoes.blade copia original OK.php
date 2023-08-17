@@ -28,15 +28,23 @@
 
     const checkboxValues = [];
     function handleCheckboxChange(event) {
+       // const id_user = event.target.dataset.userId;
         const checkbox = event.target;
         const isChecked = checkbox.checked;
         const value = isChecked ? "aprovado" : "reprovado";
         const userId = checkbox.getAttribute('data-user-id');
         checkbox.value = value + '-' + userId;
+
+       // const value = isChecked ? "aprovado" : "reprovado";
+       // const userId = checkbox.dataset.userId;
+
+        //console.clear();
+       // checkbox.value = value;
     }
 
     function handleSubmit(event) {
         event.preventDefault();
+
         // Verificar o estado de todos os checkboxes
         var checkboxes = document.querySelectorAll('#meuFormulario input[type="checkbox"]');
         var checkboxValues = [];
@@ -44,24 +52,34 @@
         checkboxes.forEach(function(checkbox) {
             var value = checkbox.value;
             var checked = checkbox.checked;
+           // var userId = checkbox.dataset.userId;
+       //     var userId = checkbox.getAttribute('data-user-id');
             console.clear();
             checkboxValues.push({
+            //     //userId: userId,
                 value: value,
+            //    // value: checkbox.value,// + userId,
                 checked: checked
             });
         });
 
         const valuesArray = [];
 
+
         // Exibir os resultados em um alerta ou elemento HTML
         checkboxValues.forEach(function(obj) {
+            // console.log('ID do usuário:', obj.userId);
+          //  console.log( obj.value);
             valuesArray.push(obj.value);
+            // console.log('Marcado:', obj.checked);
         });
         console.log('Array de valores:', valuesArray);
 
         // Envie o formulário
        //event.target.submit();
     }
+
+
 
 </script>
 </x-app-layout>
