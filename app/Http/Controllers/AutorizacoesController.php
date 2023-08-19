@@ -10,11 +10,15 @@ class AutorizacoesController extends Controller
 {
     //
     public function index()
+    //public function index($id)
     {
       // Obtenha o ID do usuário logado
       $userId = Auth::id();
       // Busque apenas as autorizações do usuário logado
+      // $autorizacoes = Autorizacao::where('Autorizador_id', $userId)->get();
       $autorizacoes = Autorizacao::where('Autorizador_id', $userId)->get();
+      //dd($autorizacoes,$userId);
+    //$autorizacoes = Autorizacao::where('Autorizador_id', $userId)->pluck('Autorizado_id');
       return view('lista_solicitacoes_autorizacoes', compact('autorizacoes'));
 
     }
@@ -48,11 +52,40 @@ class AutorizacoesController extends Controller
       //$valores=$request->all();
       $valores = $request->input('id');
       Autorizacao::create([
-        'autorizador_id' => $valores,
-        'autorizado_id' => $userId,
+        'autorizador_id' => $userId,
+        'autorizado_id' => $valores,
+        // 'autorizador_id' => $valores,
+        // 'autorizado_id' => $userId,
         'status' => 'pendente'
       ]);
       return redirect()->route('dashboard');
       //dd('Meu Id: '.$userId,' Id Solicitado: '.$valores);
     }
+
+    // public function amigos(){
+    //   return view('ver_amigos');
+    // }
+
+    public function destroy(Request $request, $id)
+    {
+        //dd($id);
+        $autorizacao = Autorizacao::findOrFail($id);
+       // dd($autorizacao);
+        // Realizar qualquer verificação adicional, se necessário
+
+        $autorizacao->delete();
+
+        // Retornar uma resposta adequada, como redirecionar para uma página ou retornar uma resposta JSON
+    }
+
+    public function update(Request $request, $id){
+    //$autorizacao = Autorizacao::findOrFail($id);
+    //$autorizacao->status = null; // Atualiza o campo "status" para null
+   // $autorizacao->fill(['status' => null]); // Atualiza o campo "status" para null
+    //$autorizacao->save();
+    //$autorizacao->update($request->all());
+    Autorizacao::where('id', $id)->update(['status' => 'null']);
+
+    }
+
 }

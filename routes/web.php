@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+   // return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -20,6 +21,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user/{id}', [UserController::class, 'show'])->name('show'); 
     // ROTAS PARA O TEXTO
     Route::get('/dashboard', [TextoController::class, 'listarTitulos'])->name('dashboard');
+    Route::get('/ver_titulos/{id}', [TextoController::class, 'verTitulos'])->name('titulos');
+    Route::get('/ver_textos/{id}', [TextoController::class, 'verTextos'])->name('textos');
     Route::get('/escrever_carta', [TextoController::class, 'escreverCarta'])->name('escrever_carta');
     Route::post('/salvar', [TextoController::class, 'salvarTexto'])->name('salvar_texto');
     Route::get('/texto/{id}', [TextoController::class, 'deletarTexto'])->name('deletar_texto');
@@ -27,8 +30,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/texto/{id}/atualizar', [TextoController::class, 'atualizarTexto'])->name('atualizar_texto');
     //ROTAS PARA AUTORIZAÇÕES
     Route::get('/autorizacoes', [AutorizacoesController::class, 'index'])->name('autorizacoes');
+    //Route::get('/autorizacoes/{id}', [AutorizacoesController::class, 'index'])->name('autorizacoes');
     Route::post('/salvar-autorizacoes', [AutorizacoesController::class, 'salvarAutorizacoes'])->name('salvar_autorizacoes');
     Route::post('/enviar-solicitacao', [AutorizacoesController::class, 'enviarSolicitacao'])->name('enviar_solicitacao');
+    Route::delete('/autorizacoes/{id}', [AutorizacoesController::class, 'destroy']);//->name('autorizacoes.destroy');
+    Route::post('/autorizacoes/{id}', [AutorizacoesController::class, 'update']);//->name('autorizacoes.destroy');
+    // ROTAS PARA AMIGOS
+    Route::get('/ver_amigos', [UserController::class, 'ver_amigos'])->name('amigos');
 });
 
 Route::middleware('auth')->group(function () {
