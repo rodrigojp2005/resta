@@ -1,7 +1,10 @@
 <x-app-layout>
     <div class="py-12">   
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white h-screen overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="flex justify-center items-center">
+                    <img src="https://media.giphy.com/media/VDNDX5BhKKz0YsJkl0/giphy.gif" class="w-20 h-20 mt-4" alt="Escrever Carta">
+                </div>
                 <div class="flex justify-center w-full">
                     <table class=" w-3/4">
                             <tbody>
@@ -21,9 +24,12 @@
                                 @endforeach
                             </tbody>
                         </table>
-
                     </div>
-                    <button onclick="goBack()" class="w-full mt-4" style="display: inline-block; padding: 8px 16px; background-color: #6CA6CD; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Voltar</button>
+                    <div class="flex justify-center">
+                        <div class="w-3/4">
+                            <button onclick="goBack()" class="w-full mx-auto my-4" style="display: inline-block; padding: 8px 16px; background-color: #6CA6CD; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Voltar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
