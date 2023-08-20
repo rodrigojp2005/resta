@@ -17,7 +17,7 @@
                                     </td>
                                     <td class="text-left p-2" style="border-bottom: 1px solid lightgray;">
                                         <span class="truncate text-left text-gray-600" style="overflow-wrap: break-word;">
-                                            <a href="{{ route('titulos', ['id' => $texto->id]) }}">{{ $texto->name }}</a>
+                                            <a href="{{ route('titulos', ['id' => $texto->id]) }}">.{{ $texto->name }}</a>
                                         </span>
                                     </td>
                                 </tr>
