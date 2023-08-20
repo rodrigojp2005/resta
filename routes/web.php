@@ -30,11 +30,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/texto/{id}/atualizar', [TextoController::class, 'atualizarTexto'])->name('atualizar_texto');
     //ROTAS PARA AUTORIZAÇÕES
     Route::get('/autorizacoes', [AutorizacoesController::class, 'index'])->name('autorizacoes');
-    //Route::get('/autorizacoes/{id}', [AutorizacoesController::class, 'index'])->name('autorizacoes');
+    Route::get('/autorizacoes', [AutorizacoesController::class, 'checkbox_autorizacoes'])->name('checkbox_autorizacoes');
     Route::post('/salvar-autorizacoes', [AutorizacoesController::class, 'salvarAutorizacoes'])->name('salvar_autorizacoes');
     Route::post('/enviar-solicitacao', [AutorizacoesController::class, 'enviarSolicitacao'])->name('enviar_solicitacao');
-    Route::delete('/autorizacoes/{id}', [AutorizacoesController::class, 'destroy']);//->name('autorizacoes.destroy');
-    Route::post('/autorizacoes/{id}', [AutorizacoesController::class, 'update']);//->name('autorizacoes.destroy');
+    Route::post('/enviar-solicitacao-dashboard', [AutorizacoesController::class, 'enviarSolicitacaoDashboard'])->name('enviar_solicitacao_dashboard');
+    Route::delete('/autorizacoes/{id}', [AutorizacoesController::class, 'destroy']);//->name('autorizacoes.destroy'); //não está em uso pq retirei a página que usaria essa fnção do ajax
+    Route::post('/autorizacoes/{id}', [AutorizacoesController::class, 'update']);//->name('autorizacoes.destroy');//não está em uso pq retirei a página que usaria essa fnção do ajax
     // ROTAS PARA AMIGOS
     Route::get('/ver_amigos', [UserController::class, 'ver_amigos'])->name('amigos');
 });

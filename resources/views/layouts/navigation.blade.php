@@ -19,7 +19,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Painel do Amor') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('autorizacoes')" :active="request()->routeIs('autorizacoes')">
+                    <x-nav-link :href="route('checkbox_autorizacoes')" :active="request()->routeIs('checkbox_autorizacoes')">
                         {{ __('Solicitações') }}
                     </x-nav-link>
                     <x-nav-link :href="route('amigos')" :active="request()->routeIs('amigos')">
@@ -79,7 +79,7 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Painel do Amor') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('autorizacoes')" :active="request()->routeIs('autorizacoes')">
+            <x-responsive-nav-link :href="route('checkbox_autorizacoes')" :active="request()->routeIs('checkbox_autorizacoes')">
                 {{ __('Solicitações') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('amigos')" :active="request()->routeIs('amigos')">

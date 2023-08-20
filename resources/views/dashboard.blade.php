@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="py-12">   
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white h-screen overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex justify-center items-center w-full">
                     <div class="items-center w-full ">
                         <div class="flex justify-center items-center">
@@ -47,35 +47,30 @@
                     @if (isset($results) && $results->count() > 0)
                         <ul class="w-full">
                             @foreach ($results as $result)
-                            <li>
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>{{ $result->name }}- {{ $result->id }}</div>
-                                    <div>
-                                        <!-- <a href="{{ route('enviar_solicitacao', ['id' => $result->id]) }}" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Solicitar Acesso</a> -->
-                                        <form action="{{ route('enviar_solicitacao') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $result->id }}">
-                                            @if ($result->status == 'pendente')
-                                                <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #c0c0c0; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;" disabled>Pendente</button>
-                                            @elseif ($result->status == null)
-                                                <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Solicitar Acesso</button>
-                                            @elseif ($result->status == 'aprovado')
-                                                <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4285F4; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;"><a href="{{ route('titulos', ['id' => $result->id]) }}" class="text-white"> Aprovado</a></button>
-                                            @elseif ($result->status == 'reprovado')
-                                            <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #DB4A3B; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;" disabled>Recusado</button>
-                                            @else
-                                                <!-- <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #ff0000; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;" disabled>Recusado</button> -->
-                                                <!-- <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #DB4A3B; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;" disabled>Recusado</button> -->
-                                                <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Solicitar Acesso</button>
-                                            @endif
-                                            <!-- <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Solicitar Acesso</button> -->
-                                        </form>
+                            @if($result->id != Auth::id())
+                               <li>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div>{{ $result->name }}-{{ $result->id }}</div>
+                                        <div>
+                                            <form action="{{ route('enviar_solicitacao_dashboard') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $result->id }}">
+                                                @if ($result->status == 'pendente')
+                                                    <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #c0c0c0; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;" disabled>Pendente</button>
+                                                @elseif ($result->status == null)
+                                                    <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Solicitar Acesso</button>
+                                                @elseif ($result->status == 'aprovado')
+                                                    <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4285F4; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;"><a href="{{ route('titulos', ['id' => $result->id]) }}" class="text-white"> Aprovado</a></button>
+                                                @elseif ($result->status == 'reprovado')
+                                                <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #DB4A3B; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;" disabled>Recusado</button>
+                                                @else
+                                                    <button type="submit" id="btn-solicitar-acesso" class="mt-2" style="display: inline-block; padding: 4px 8px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Solicitar Acesso</button>
+                                                @endif
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                                <!-- <li>{{ $result->name }} -
-                                    <a href="{{ route('show', ['id' => $result->id]) }}" class="mt-4" style="display: inline-block; padding: 8px 16px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Acessar</a>
-                                </li> -->
+                                </li>
+                            @endif
                             @endforeach
                         </ul>
                     @else

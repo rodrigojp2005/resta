@@ -19,7 +19,6 @@
                                 <label for="texto" class="block font-medium">Texto:</label>
                                 <textarea id="texto" name="texto" class="rounded-lg shadow-sm p-2 w-full">{{ $textos->texto }}</textarea>
                             </div>
-                            <!-- <button type="submit" >Salvar</button> -->
                             <button type="submit"  class="w-full mt-4" style="display: inline-block; padding: 8px 16px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">Atualizar</button>
                         </form>
                     </div>

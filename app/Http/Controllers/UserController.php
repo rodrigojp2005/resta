@@ -34,54 +34,30 @@ class UserController extends Controller
     {
         $name = $request->input('name');
         $userId = Auth::id();
-
         $results = User::leftJoin('autorizacoes', function($join) use ($userId) {
-                $join->on('users.id', '=', 'autorizacoes.autorizado_id')
-                    ->where('autorizacoes.autorizador_id', '=', $userId);
+            $join->on('users.id', '=', 'autorizacoes.autorizador_id')
+                ->where('autorizacoes.autorizado_id', '=', $userId);
             })
             ->where('users.name', 'LIKE', '%' . $name . '%')
-            ->select('users.name', 'users.id', 'autorizacoes.status', 'autorizacoes.autorizador_id', 'autorizacoes.autorizado_id')
+            ->select('users.name', 'users.id','autorizacoes.status', 'autorizacoes.autorizador_id', 'autorizacoes.autorizado_id')
             ->get();
-        //dd($results);
-
         return view('dashboard', ['results' => $results]);
     }
 
     public function show($id)
     {
-        // Recuperar o usuário com base no ID
         $user = User::findOrFail($id);
-
         // Retornar uma view que exiba os detalhes do usuário
         return view('show', ['user' => $user]);
     }
 
     public function listarAutorizacoes(){
-        // consulta tabela de autorizações:
         return view('lista_solicitacoes_autorizacoes');
     }
-
-    // public function ver_amigos(Request $request)
+    
     public function ver_amigos()
     {
-        //dd($request->all());
-        //$name = $request->input('name');
         $userId = Auth::id();
-
-        // $results = User::leftJoin('autorizacoes', function($join) use ($userId) {
-        //         $join->on('users.id', '=', 'autorizacoes.autorizado_id')
-        //             ->where('autorizacoes.autorizador_id', '=', $userId);
-        //     })
-        //     ->where('users.name', 'LIKE', '%' . $name . '%')
-        //     ->select('users.name', 'users.id', 'autorizacoes.status', 'autorizacoes.autorizador_id', 'autorizacoes.autorizado_id')
-        //     ->get();
-        //dd($results);
-        // $aprovados = User::leftJoin('autorizacoes', function($join) use ($userId) {
-        //          $join->on('users.id', '=', 'autorizacoes.autorizado_id')
-        //              ->where('autorizacoes.autorizador_id', '=', $userId);
-        //      })
-        //      ->select('users.name', 'users.id', 'autorizacoes.status', 'autorizacoes.autorizador_id', 'autorizacoes.autorizado_id')
-        //      ->get();
         $aprovados = User::leftJoin('autorizacoes', function($join) use ($userId) {
             $join->on('users.id', '=', 'autorizacoes.autorizado_id')
                 ->where('autorizacoes.autorizador_id', '=', $userId);
@@ -89,8 +65,6 @@ class UserController extends Controller
         ->where('autorizacoes.status', '=', 'aprovado')
         ->select('users.name', 'users.id')
         ->get();
-        //dd($aprovados);
-
         return view('ver_amigos', ['results' => $aprovados]);
     }
 

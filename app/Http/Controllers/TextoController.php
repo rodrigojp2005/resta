@@ -15,29 +15,18 @@ class TextoController extends Controller
     {
         $userId = Auth::id();
         $textos = Texto::where('user_id', $userId)->get(['id', 'titulo']);
-        //dd($textos);
         return view('dashboard', ['textos' => $textos]);
-        //return view('dashboard', compact('textos'));
     }
 
     public function verTitulos($id){
-      //  dd($id);
-
-    //   //  $texto = Texto::find('user_id', $id);
-    //     $texto = Texto::where('user_id', $id)->pluck('titulo');
-    //     //dd($texto);
-    //     return view('ver_titulos', compact('texto'));
         $textos = Texto::where('user_id', $id)->get(['id', 'titulo']);
         return view('ver_titulos', compact('textos'));    
     }
 
     public function verTextos($id){
-       // dd($id);
         $textos = Texto::where('id', $id)->get(['id', 'texto']);
-       // dd($textos);    
         return view('ver_textos', compact('textos'));
-    }
-    
+    }   
 
     public function salvarTexto(Request $request)
     {
@@ -46,10 +35,8 @@ class TextoController extends Controller
         $texto->titulo = $request->input('titulo');
         $texto->texto = $request->input('texto');
         $texto->save();
-    
-       // Faça qualquer outra lógica necessária
+        
         return redirect('/dashboard')->with('titulo', 'Texto salvo com sucesso.');
-
     }
         
     public function deletarTexto($id)
